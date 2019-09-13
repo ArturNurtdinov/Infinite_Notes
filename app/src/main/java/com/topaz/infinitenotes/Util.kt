@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun convertTimestampToDate(timestamp: Long): String {
-    val date = Date(timestamp * 1000)
+    val date = Date(timestamp)
     val dateFormat =
         if (date.day == Date(System.currentTimeMillis()).day) {
             SimpleDateFormat("HH:mm", Locale.getDefault())
