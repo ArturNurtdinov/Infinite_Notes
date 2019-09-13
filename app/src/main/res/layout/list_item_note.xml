@@ -32,8 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:maxHeight="80dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             android:text="@{note.content}"
             android:textColor="@android:color/black"
             android:textSize="16sp"
