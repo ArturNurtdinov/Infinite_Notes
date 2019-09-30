@@ -18,6 +18,7 @@ import com.topaz.infinitenotes.databinding.FragmentNewnoteBinding
 class NewnoteFragment : Fragment() {
 
     private var note: Note? = null
+    lateinit var viewModel: NewnoteViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +32,7 @@ class NewnoteFragment : Fragment() {
         val dataSource =
             NotesDatabase.getInstance(requireNotNull(this.activity).application).noteDatabaseDao
         val viewModelFactory = NewnoteViewModelFactory(dataSource)
-        val viewModel = ViewModelProviders.of(this).get(NewnoteViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewnoteViewModel::class.java)
 
         return binding.root
     }
