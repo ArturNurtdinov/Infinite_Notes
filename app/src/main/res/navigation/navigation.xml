@@ -9,5 +9,18 @@
         android:id="@+id/notesFragment"
         android:name="com.topaz.infinitenotes.notes.NotesFragment"
         android:label="NotesFragment"
-        tools:layout="@layout/fragment_notes" />
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment_to_newnoteFragment"
+            app:destination="@id/newnoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newnoteFragment"
+        android:name="com.topaz.infinitenotes.newnotes.NewnoteFragment"
+        android:label="fragment_newnote"
+        tools:layout="@layout/fragment_newnote" >
+        <action
+            android:id="@+id/action_newnoteFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
+    </fragment>
 </navigation>
