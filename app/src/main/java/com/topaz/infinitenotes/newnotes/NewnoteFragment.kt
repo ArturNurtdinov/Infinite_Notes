@@ -18,12 +18,13 @@ import com.topaz.infinitenotes.databinding.FragmentNewnoteBinding
 class NewnoteFragment : Fragment() {
 
     private var note: Note? = null
-    lateinit var viewModel: NewnoteViewModel
+    private lateinit var viewModel: NewnoteViewModel
+    private lateinit var binding: FragmentNewnoteBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentNewnoteBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_newnote, container, false)
         setHasOptionsMenu(true)
         note = arguments?.getParcelable("NOTE_KEY")
@@ -45,6 +46,27 @@ class NewnoteFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.done -> {
+                if (note == null) {
+                    if (binding.title.text.isNotEmpty() && binding.content.text.isNotEmpty()) {
+                        viewModel.insertNote(
+                            Note(
+                                0,
+                                System.currentTimeMillis(),
+                                binding.title.text.toString(),
+                                binding.content.text.toString()
+                            )
+                        )
+                    }
+                } else {
+                    viewModel.updateNote(
+                        Note(
+                            note!!.noteID,
+                            System.currentTimeMillis(),
+                            binding.title.text.toString(),
+                            binding.content.text.toString()
+                        )
+                    )
+                }
                 activity?.onBackPressed()
                 true
             }
