@@ -38,7 +38,7 @@ class NotesFragment : Fragment() {
 
         binding.notesViewModel = notesViewModel
 
-        val adapter = NotesAdapter(object : OnItemClickListener{
+        val adapter = NotesAdapter(object : OnItemClickListener {
             override fun onClick(vh: View, item: Note) {
                 val fragment = NewnoteFragment()
                 val bundle = Bundle()
@@ -63,7 +63,7 @@ class NotesFragment : Fragment() {
 
         notesViewModel.notes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it.sortedBy { it.timeEdit })
+                adapter.submitList(it.sortedBy { -it.timeEdit })
             }
         })
         binding.lifecycleOwner = this
