@@ -18,8 +18,9 @@ import com.topaz.infinitenotes.databinding.FragmentNewnoteBinding
 class NewnoteFragment : Fragment() {
 
     private var note: Note? = null
+    private var isNoteChanged = false
+    private lateinit var binding : FragmentNewnoteBinding
     private lateinit var viewModel: NewnoteViewModel
-    private lateinit var binding: FragmentNewnoteBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +36,10 @@ class NewnoteFragment : Fragment() {
         val viewModelFactory = NewnoteViewModelFactory(dataSource)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewnoteViewModel::class.java)
 
+        binding.content.setOnClickListener { isNoteChanged = true }
+
+        binding.content.setOnClickListener { isNoteChanged = true }
+
         return binding.root
     }
 
@@ -47,7 +52,7 @@ class NewnoteFragment : Fragment() {
         return when (item.itemId) {
             R.id.done -> {
                 if (note == null) {
-                    if (binding.title.text.isNotEmpty() && binding.content.text.isNotEmpty()) {
+                    if (binding.title.text.isNotEmpty() || binding.content.text.isNotEmpty()) {
                         viewModel.insertNote(
                             Note(
                                 0,
@@ -57,7 +62,7 @@ class NewnoteFragment : Fragment() {
                             )
                         )
                     }
-                } else {
+                } else if (isNoteChanged) {
                     viewModel.updateNote(
                         Note(
                             note!!.noteID,
