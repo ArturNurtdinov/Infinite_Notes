@@ -6,6 +6,9 @@
     <string name="add_new">Add new</string>
     <string name="done">Done</string>
     <string name="title">Title</string>
-    <string name="content">Content</string>
+    <string name="content">Content</string>\
+    <string name="asking_to_delete">Do you really want to delete this note?</string>
     <string name="cancel">Cancel</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>
