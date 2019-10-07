@@ -19,7 +19,7 @@ class NewnoteFragment : Fragment() {
 
     private var note: Note? = null
     private var isNoteChanged = false
-    private lateinit var binding : FragmentNewnoteBinding
+    private lateinit var binding: FragmentNewnoteBinding
     private lateinit var viewModel: NewnoteViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,6 +72,10 @@ class NewnoteFragment : Fragment() {
                         )
                     )
                 }
+                activity?.onBackPressed()
+                true
+            }
+            R.id.cancel -> {
                 activity?.onBackPressed()
                 true
             }
