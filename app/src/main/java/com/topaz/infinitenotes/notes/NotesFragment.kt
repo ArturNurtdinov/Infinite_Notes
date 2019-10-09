@@ -64,10 +64,10 @@ class NotesFragment : Fragment() {
             notesViewModel.deleteNote(note.noteID)
             val snackbar = Snackbar.make(
                 view ?: return@SwipeToDeleteCallback,
-                "Note was deleted",
+                getString(R.string.note_was_deleted),
                 Snackbar.LENGTH_LONG
             )
-                .setAction("UNDO") {
+                .setAction(getString(R.string.undo_UC)) {
                     notesViewModel.insertNote(note)
                 }
             snackbar.show()
