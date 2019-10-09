@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
 import com.topaz.infinitenotes.R
 import com.topaz.infinitenotes.database.Note
 import com.topaz.infinitenotes.database.NotesDatabase
@@ -58,8 +59,18 @@ class NotesFragment : Fragment() {
             )
         )
         binding.notesList.adapter = adapter
-        ItemTouchHelper(SwipeToDeleteCallback({
-            notesViewModel.deleteNote(adapter.get(it).noteID)
+        ItemTouchHelper(SwipeToDeleteCallback(context!!.applicationContext, {
+            val note = adapter.get(it)
+            notesViewModel.deleteNote(note.noteID)
+            val snackbar = Snackbar.make(
+                view ?: return@SwipeToDeleteCallback,
+                "Note was deleted",
+                Snackbar.LENGTH_LONG
+            )
+                .setAction("UNDO") {
+                    notesViewModel.insertNote(note)
+                }
+            snackbar.show()
         }, 0, ItemTouchHelper.LEFT)).attachToRecyclerView(binding.notesList)
 
         notesViewModel.notes.observe(viewLifecycleOwner, Observer {
