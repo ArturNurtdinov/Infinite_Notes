@@ -3,12 +3,12 @@ package com.topaz.infinitenotes.notes
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.topaz.infinitenotes.R
 import com.topaz.infinitenotes.database.Note
 import com.topaz.infinitenotes.database.NotesDatabase
@@ -49,20 +49,6 @@ class NotesFragment : Fragment() {
                 transaction.addToBackStack(null)
                 transaction.commit()
             }
-
-            override fun onLongClick(vh: View, item: Note): Boolean {
-                val alertDialog = AlertDialog.Builder(vh.context)
-                    .setTitle(getString(R.string.asking_to_delete))
-                    .setNeutralButton(getString(R.string.cancel)) { dialog, _ -> dialog.dismiss() }
-                    .setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.dismiss() }
-                    .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
-                        notesViewModel.deleteNote(item.noteID)
-                        dialog.dismiss()
-                    }
-                    .create()
-                alertDialog.show()
-                return true
-            }
         })
 
         binding.notesList.addItemDecoration(
@@ -72,8 +58,9 @@ class NotesFragment : Fragment() {
             )
         )
         binding.notesList.adapter = adapter
-
-
+        ItemTouchHelper(SwipeToDeleteCallback({
+            notesViewModel.deleteNote(adapter.get(it).noteID)
+        }, 0, ItemTouchHelper.LEFT)).attachToRecyclerView(binding.notesList)
 
         notesViewModel.notes.observe(viewLifecycleOwner, Observer {
             it?.let {
