@@ -11,7 +11,6 @@ import com.topaz.infinitenotes.databinding.ListItemNoteBinding
 
 interface OnItemClickListener {
     fun onClick(vh: View, item: Note)
-    fun onLongClick(vh: View, item: Note): Boolean
 }
 
 class NotesAdapter(private val listener: OnItemClickListener) :
@@ -24,6 +23,10 @@ class NotesAdapter(private val listener: OnItemClickListener) :
         holder.bind(getItem(position))
     }
 
+    fun get(position: Int): Note {
+        return getItem(position)
+    }
+
     class ViewHolder private constructor(
         private val binding: ListItemNoteBinding,
         private val listener: OnItemClickListener
@@ -32,7 +35,6 @@ class NotesAdapter(private val listener: OnItemClickListener) :
         fun bind(item: Note) {
             binding.note = item
             binding.root.setOnClickListener { listener.onClick(binding.root, item) }
-            binding.root.setOnLongClickListener { listener.onLongClick(binding.root, item) }
             binding.executePendingBindings()
         }
 
