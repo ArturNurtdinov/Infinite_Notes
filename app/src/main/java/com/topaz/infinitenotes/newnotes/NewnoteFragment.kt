@@ -40,6 +40,8 @@ class NewnoteFragment : Fragment() {
 
         binding.content.setOnClickListener { isNoteChanged = true }
 
+        binding.content.requestFocus()
+
         return binding.root
     }
 
