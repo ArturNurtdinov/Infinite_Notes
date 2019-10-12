@@ -61,18 +61,18 @@ class NewnoteFragment : Fragment() {
                                 binding.content.text.toString()
                             )
                         )
-                    }
-                } else if (isNoteChanged) {
-                    viewModel.updateNote(
-                        Note(
-                            note!!.noteID,
-                            System.currentTimeMillis(),
-                            binding.title.text.toString(),
-                            binding.content.text.toString()
+                    } else if (isNoteChanged) {
+                        viewModel.updateNote(
+                            Note(
+                                note!!.noteID,
+                                System.currentTimeMillis(),
+                                binding.title.text.toString(),
+                                binding.content.text.toString()
+                            )
                         )
-                    )
+                    }
+                    activity?.onBackPressed()
                 }
-                activity?.onBackPressed()
                 true
             }
             R.id.cancel -> {
