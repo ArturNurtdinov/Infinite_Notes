@@ -1,8 +1,10 @@
 package com.topaz.infinitenotes.newnotes
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -18,7 +20,8 @@ import com.topaz.infinitenotes.databinding.FragmentNewnoteBinding
 class NewnoteFragment : Fragment() {
 
     private var note: Note? = null
-    private var isNoteChanged = false
+    private var savedTitle: String? = null
+    private var savedContent: String? = null
     private lateinit var binding: FragmentNewnoteBinding
     private lateinit var viewModel: NewnoteViewModel
     override fun onCreateView(
@@ -30,17 +33,19 @@ class NewnoteFragment : Fragment() {
         setHasOptionsMenu(true)
         note = arguments?.getParcelable("NOTE_KEY")
         binding.note = note
+        binding.executePendingBindings()
 
         val dataSource =
             NotesDatabase.getInstance(requireNotNull(this.activity).application).noteDatabaseDao
         val viewModelFactory = NewnoteViewModelFactory(dataSource)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewnoteViewModel::class.java)
 
-        binding.content.setOnClickListener { isNoteChanged = true }
-
-        binding.content.setOnClickListener { isNoteChanged = true }
-
+        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         binding.content.requestFocus()
+
+        savedTitle = binding.title.text.toString()
+        savedContent = binding.content.text.toString()
 
         return binding.root
     }
@@ -63,18 +68,20 @@ class NewnoteFragment : Fragment() {
                                 binding.content.text.toString()
                             )
                         )
-                    } else if (isNoteChanged) {
-                        viewModel.updateNote(
-                            Note(
-                                note!!.noteID,
-                                System.currentTimeMillis(),
-                                binding.title.text.toString(),
-                                binding.content.text.toString()
-                            )
-                        )
                     }
-                    activity?.onBackPressed()
+                } else if ((binding.title.text.toString() != savedTitle) ||
+                    (binding.content.text.toString() != savedContent)
+                ) {
+                    viewModel.updateNote(
+                        Note(
+                            note!!.noteID,
+                            System.currentTimeMillis(),
+                            binding.title.text.toString(),
+                            binding.content.text.toString()
+                        )
+                    )
                 }
+                activity?.onBackPressed()
                 true
             }
             R.id.cancel -> {
@@ -83,5 +90,11 @@ class NewnoteFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroyView() {
+        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+        super.onDestroyView()
     }
 }
