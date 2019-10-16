@@ -59,6 +59,15 @@ class NotesFragment : Fragment() {
             )
         )
         binding.notesList.adapter = adapter
+
+        binding.fab.setOnClickListener {
+            val fragment = NewnoteFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.nav_host_fragment, fragment)
+            transaction?.addToBackStack(null)
+            transaction?.commit()
+        }
+
         ItemTouchHelper(SwipeToDeleteCallback(context!!.applicationContext, {
             val note = adapter.get(it)
             notesViewModel.deleteNote(note.noteID)
