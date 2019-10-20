@@ -18,12 +18,6 @@ class NotesViewModel(
         }
     }
 
-    private suspend fun update(note: Note) {
-        withContext(Dispatchers.IO) {
-            dataSource.update(note)
-        }
-    }
-
     private suspend fun delete(id: Long) {
         withContext(Dispatchers.IO) {
             dataSource.delete(id)
