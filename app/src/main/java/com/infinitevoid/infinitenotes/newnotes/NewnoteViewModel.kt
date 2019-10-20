@@ -22,18 +22,8 @@ class NewnoteViewModel(private val dataSource: NotesDatabaseDao) : ViewModel() {
         }
     }
 
-    private suspend fun delete(id: Long) {
-        withContext(Dispatchers.IO) {
-            dataSource.delete(id)
-        }
-    }
-
     fun insertNote(note: Note) {
         uiScope.launch { insert(note) }
-    }
-
-    fun deleteNote(id: Long) {
-        uiScope.launch { delete(id) }
     }
 
     fun updateNote(note: Note){
