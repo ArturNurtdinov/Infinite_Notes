@@ -1,4 +1,4 @@
-package com.topaz.infinitenotes
+package com.infinitevoid.infinitenotes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

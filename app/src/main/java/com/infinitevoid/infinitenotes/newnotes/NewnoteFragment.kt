@@ -1,4 +1,4 @@
-package com.topaz.infinitenotes.newnotes
+package com.infinitevoid.infinitenotes.newnotes
 
 
 import android.content.Context
@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 
-import com.topaz.infinitenotes.R
-import com.topaz.infinitenotes.database.Note
-import com.topaz.infinitenotes.database.NotesDatabase
-import com.topaz.infinitenotes.databinding.FragmentNewnoteBinding
+import com.infinitevoid.infinitenotes.R
+import com.infinitevoid.infinitenotes.database.Note
+import com.infinitevoid.infinitenotes.database.NotesDatabase
+import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 
 /**
  * A simple [Fragment] subclass.

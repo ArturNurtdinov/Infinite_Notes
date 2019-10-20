@@ -1,9 +1,9 @@
-package com.topaz.infinitenotes.notes
+package com.infinitevoid.infinitenotes.notes
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.topaz.infinitenotes.convertTimestampToDate
-import com.topaz.infinitenotes.database.Note
+import com.infinitevoid.infinitenotes.convertTimestampToDate
+import com.infinitevoid.infinitenotes.database.Note
 
 @BindingAdapter("timestampToDate")
 fun TextView.setTimestampToDate(item: Note) {

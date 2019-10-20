@@ -1,8 +1,8 @@
-package com.topaz.infinitenotes.newnotes
+package com.infinitevoid.infinitenotes.newnotes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.topaz.infinitenotes.database.NotesDatabaseDao
+import com.infinitevoid.infinitenotes.database.NotesDatabaseDao
 import java.lang.IllegalArgumentException
 
 class NewnoteViewModelFactory(private val dataSource: NotesDatabaseDao): ViewModelProvider.Factory {

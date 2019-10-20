@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.topaz.infinitenotes.notes.NotesFragment"
+        android:name="com.infinitevoid.infinitenotes.notes.NotesFragment"
         android:label="NotesFragment"
         tools:layout="@layout/fragment_notes" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/newnoteFragment"
-        android:name="com.topaz.infinitenotes.newnotes.NewnoteFragment"
+        android:name="com.infinitevoid.infinitenotes.newnotes.NewnoteFragment"
         android:label="fragment_newnote"
         tools:layout="@layout/fragment_newnote" >
         <action

@@ -1,4 +1,4 @@
-package com.topaz.infinitenotes.database
+package com.infinitevoid.infinitenotes.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

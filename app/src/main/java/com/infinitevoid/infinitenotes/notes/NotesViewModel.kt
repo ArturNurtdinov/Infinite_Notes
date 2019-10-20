@@ -1,11 +1,13 @@
-package com.topaz.infinitenotes.newnotes
+package com.infinitevoid.infinitenotes.notes
 
 import androidx.lifecycle.ViewModel
-import com.topaz.infinitenotes.database.Note
-import com.topaz.infinitenotes.database.NotesDatabaseDao
+import com.infinitevoid.infinitenotes.database.Note
+import com.infinitevoid.infinitenotes.database.NotesDatabaseDao
 import kotlinx.coroutines.*
 
-class NewnoteViewModel(private val dataSource: NotesDatabaseDao) : ViewModel() {
+class NotesViewModel(
+    private val dataSource: NotesDatabaseDao
+) : ViewModel() {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     val notes = dataSource.getAllNotes()
@@ -34,9 +36,5 @@ class NewnoteViewModel(private val dataSource: NotesDatabaseDao) : ViewModel() {
 
     fun deleteNote(id: Long) {
         uiScope.launch { delete(id) }
-    }
-
-    fun updateNote(note: Note){
-        uiScope.launch { update(note) }
     }
 }

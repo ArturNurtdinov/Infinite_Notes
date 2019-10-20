@@ -1,4 +1,4 @@
-package com.topaz.infinitenotes.notes
+package com.infinitevoid.infinitenotes.notes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.topaz.infinitenotes.database.Note
-import com.topaz.infinitenotes.databinding.ListItemNoteBinding
+import com.infinitevoid.infinitenotes.database.Note
+import com.infinitevoid.infinitenotes.databinding.ListItemNoteBinding
 
 interface OnItemClickListener {
     fun onClick(vh: View, item: Note)

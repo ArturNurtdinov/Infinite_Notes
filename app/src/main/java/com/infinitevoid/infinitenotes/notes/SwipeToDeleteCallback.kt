@@ -1,4 +1,4 @@
-package com.topaz.infinitenotes.notes
+package com.infinitevoid.infinitenotes.notes
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,7 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.topaz.infinitenotes.R
+import com.infinitevoid.infinitenotes.R
 
 
 class SwipeToDeleteCallback(

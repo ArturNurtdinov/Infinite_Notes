@@ -1,4 +1,4 @@
-package com.topaz.infinitenotes.notes
+package com.infinitevoid.infinitenotes.notes
 
 
 import android.os.Bundle
@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
-import com.topaz.infinitenotes.R
-import com.topaz.infinitenotes.database.Note
-import com.topaz.infinitenotes.database.NotesDatabase
-import com.topaz.infinitenotes.databinding.FragmentNotesBinding
-import com.topaz.infinitenotes.newnotes.NewnoteFragment
+import com.infinitevoid.infinitenotes.R
+import com.infinitevoid.infinitenotes.database.Note
+import com.infinitevoid.infinitenotes.database.NotesDatabase
+import com.infinitevoid.infinitenotes.databinding.FragmentNotesBinding
+import com.infinitevoid.infinitenotes.newnotes.NewnoteFragment
 
 /**
  * A simple [Fragment] subclass.

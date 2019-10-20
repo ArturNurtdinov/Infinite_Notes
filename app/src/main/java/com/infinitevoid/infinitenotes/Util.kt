@@ -1,4 +1,4 @@
-package com.topaz.infinitenotes
+package com.infinitevoid.infinitenotes
 
 import java.text.SimpleDateFormat
 import java.util.*

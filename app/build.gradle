@@ -14,7 +14,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
     defaultConfig {
-        applicationId "com.topaz.infinitenotes"
+        applicationId "com.infinitevoid.infinitenotes"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
