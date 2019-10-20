@@ -84,7 +84,7 @@ class NotesFragment : Fragment() {
 
         notesViewModel.notes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it.sortedBy { -it.timeEdit })
+                adapter.submitList(it.sortedBy { note -> -note.timeEdit })
             }
         })
         binding.lifecycleOwner = this
