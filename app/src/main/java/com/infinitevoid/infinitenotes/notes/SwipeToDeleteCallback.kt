@@ -33,9 +33,9 @@ class SwipeToDeleteCallback(
         val itemView = viewHolder.itemView
         val offset = 20
         if (icon == null) return
-        val iconMargin = (itemView.height - icon.intrinsicHeight) / 2
+        val iconMargin = 60
         val iconTop = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
-        val iconBottom = itemView.top + icon.intrinsicHeight
+        val iconBottom = iconTop + icon.intrinsicHeight
         when {
             dX > 0 -> {
                 val iconLeft = itemView.left + iconMargin + icon.intrinsicWidth
