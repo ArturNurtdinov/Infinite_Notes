@@ -26,7 +26,7 @@ class NewnoteViewModel(private val dataSource: NotesDatabaseDao) : ViewModel() {
         uiScope.launch { insert(note) }
     }
 
-    fun updateNote(note: Note){
+    fun updateNote(note: Note) {
         uiScope.launch { update(note) }
     }
 }
