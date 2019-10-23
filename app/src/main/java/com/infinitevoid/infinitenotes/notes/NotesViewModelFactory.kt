@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.infinitevoid.infinitenotes.database.NotesDatabaseDao
 import java.lang.IllegalArgumentException
 
-class NotesViewModelFactory(private val dataSource: NotesDatabaseDao):ViewModelProvider.Factory {
+class NotesViewModelFactory(private val dataSource: NotesDatabaseDao) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NotesViewModel::class.java)) {
