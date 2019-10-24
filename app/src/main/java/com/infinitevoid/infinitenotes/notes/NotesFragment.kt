@@ -41,14 +41,7 @@ class NotesFragment : Fragment() {
 
         val adapter = NotesAdapter(object : OnItemClickListener {
             override fun onClick(vh: View, item: Note) {
-                val fragment = NewnoteFragment()
-                val bundle = Bundle()
-                bundle.putParcelable("NOTE_KEY", item)
-                fragment.arguments = bundle
-                val transaction = fragmentManager?.beginTransaction() ?: return
-                transaction.replace(R.id.nav_host_fragment, fragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
+                openNewNoteFragmentWith(item)
             }
         })
 
@@ -109,5 +102,16 @@ class NotesFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun openNewNoteFragmentWith(item: Note){
+        val fragment = NewnoteFragment()
+        val bundle = Bundle()
+        bundle.putParcelable("NOTE_KEY", item)
+        fragment.arguments = bundle
+        val transaction = fragmentManager?.beginTransaction() ?: return
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
