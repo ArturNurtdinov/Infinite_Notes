@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.infinitevoid.infinitenotes.database.Note
 import com.infinitevoid.infinitenotes.databinding.ListItemNoteBinding
+import com.infinitevoid.infinitenotes.domain.Note
 
 interface OnItemClickListener {
     fun onClick(vh: View, item: Note)
