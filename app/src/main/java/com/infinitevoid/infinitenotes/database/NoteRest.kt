@@ -3,12 +3,9 @@ package com.infinitevoid.infinitenotes.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "notes_table")
-@Parcelize
-data class Note(
+data class NoteRest(
     @PrimaryKey(autoGenerate = true)
     var noteID: Long = 0L,
 
@@ -20,4 +17,4 @@ data class Note(
 
     @ColumnInfo(name = "content")
     var content: String = "Content"
-) : Parcelable
+)
