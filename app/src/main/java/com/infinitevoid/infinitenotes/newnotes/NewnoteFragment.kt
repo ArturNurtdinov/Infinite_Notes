@@ -10,9 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 
 import com.infinitevoid.infinitenotes.R
-import com.infinitevoid.infinitenotes.database.Note
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
+import com.infinitevoid.infinitenotes.domain.Note
 
 /**
  * A simple [Fragment] subclass.

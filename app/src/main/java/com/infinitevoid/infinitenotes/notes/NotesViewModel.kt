@@ -1,7 +1,7 @@
 package com.infinitevoid.infinitenotes.notes
 
 import androidx.lifecycle.ViewModel
-import com.infinitevoid.infinitenotes.database.Note
+import com.infinitevoid.infinitenotes.database.NoteRest
 import com.infinitevoid.infinitenotes.database.NotesDatabaseDao
 import kotlinx.coroutines.*
 
@@ -12,7 +12,7 @@ class NotesViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     val notes = dataSource.getAllNotes()
 
-    private suspend fun insert(note: Note) {
+    private suspend fun insert(note: NoteRest) {
         withContext(Dispatchers.IO) {
             dataSource.insert(note)
         }
@@ -24,7 +24,7 @@ class NotesViewModel(
         }
     }
 
-    fun insertNote(note: Note) {
+    fun insertNote(note: NoteRest) {
         uiScope.launch { insert(note) }
     }
 

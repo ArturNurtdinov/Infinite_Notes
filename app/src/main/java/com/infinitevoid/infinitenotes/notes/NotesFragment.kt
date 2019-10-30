@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.infinitevoid.infinitenotes.R
-import com.infinitevoid.infinitenotes.database.Note
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNotesBinding
+import com.infinitevoid.infinitenotes.domain.Note
+import com.infinitevoid.infinitenotes.mappers.mapNoteRestListToNoteList
+import com.infinitevoid.infinitenotes.mappers.mapNoteToNoteRest
 import com.infinitevoid.infinitenotes.newnotes.NewnoteFragment
 
 /**
@@ -70,14 +72,14 @@ class NotesFragment : Fragment() {
                 Snackbar.LENGTH_LONG
             )
                 .setAction(getString(R.string.undo_UC)) {
-                    notesViewModel.insertNote(note)
+                    notesViewModel.insertNote(mapNoteToNoteRest(note))
                 }
             snackbar.show()
         }, 0, ItemTouchHelper.LEFT)).attachToRecyclerView(binding.notesList)
 
         notesViewModel.notes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it.sortedBy { note -> -note.timeEdit })
+                adapter.submitList(mapNoteRestListToNoteList(it).sortedBy { note -> -note.timeEdit })
             }
         })
         binding.lifecycleOwner = this
@@ -104,7 +106,7 @@ class NotesFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun openNewNoteFragmentWith(item: Note){
+    private fun openNewNoteFragmentWith(item: Note) {
         val fragment = NewnoteFragment()
         val bundle = Bundle()
         bundle.putParcelable("NOTE_KEY", item)
