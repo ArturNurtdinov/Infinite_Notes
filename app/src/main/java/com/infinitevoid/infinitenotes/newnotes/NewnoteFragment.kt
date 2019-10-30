@@ -93,7 +93,7 @@ class NewnoteFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         super.onDestroyView()
     }
