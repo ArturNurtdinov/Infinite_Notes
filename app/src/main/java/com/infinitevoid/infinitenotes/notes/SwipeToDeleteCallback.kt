@@ -15,8 +15,8 @@ class SwipeToDeleteCallback(
     val delete: (Int) -> Unit,
     dragDirs: Int,
     swipeDirs: Int
-) :
-    ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
+) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
+
     private val icon = ContextCompat.getDrawable(context, R.drawable.ic_delete_white_36dp)
     private val background = ColorDrawable(Color.RED)
 
