@@ -20,8 +20,8 @@ import com.infinitevoid.infinitenotes.domain.Note
 class NewnoteFragment : Fragment() {
 
     private var note: Note? = null
-    private var savedTitle: String? = null
-    private var savedContent: String? = null
+    private var titleOnOpen: String? = null
+    private var contentOnOpen: String? = null
     private lateinit var binding: FragmentNewnoteBinding
     private lateinit var viewModel: NewnoteViewModel
     override fun onCreateView(
@@ -44,8 +44,8 @@ class NewnoteFragment : Fragment() {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         binding.content.requestFocus()
 
-        savedTitle = binding.title.text.toString()
-        savedContent = binding.content.text.toString()
+        titleOnOpen = binding.title.text.toString()
+        contentOnOpen = binding.content.text.toString()
 
         return binding.root
     }
@@ -69,8 +69,8 @@ class NewnoteFragment : Fragment() {
                             )
                         )
                     }
-                } else if ((binding.title.text.toString() != savedTitle) ||
-                    (binding.content.text.toString() != savedContent)
+                } else if ((binding.title.text.toString() != titleOnOpen) ||
+                    (binding.content.text.toString() != contentOnOpen)
                 ) {
                     viewModel.updateNote(
                         Note(
