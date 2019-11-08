@@ -22,5 +22,16 @@
         <action
             android:id="@+id/action_newnoteFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
+        <action
+            android:id="@+id/action_newnoteFragment_to_painterFragment"
+            app:destination="@id/painterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/painterFragment"
+        android:name="com.infinitevoid.painter_feature.PainterFragment"
+        android:label="PainterFragment" >
+        <action
+            android:id="@+id/action_painterFragment_to_newnoteFragment"
+            app:destination="@id/newnoteFragment" />
     </fragment>
 </navigation>
