@@ -13,6 +13,7 @@ import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 import com.infinitevoid.infinitenotes.domain.Note
+import com.infinitevoid.painter_feature.PainterFragment
 
 /**
  * A simple [Fragment] subclass.
@@ -88,6 +89,10 @@ class NewnoteFragment : Fragment() {
                 activity?.onBackPressed()
                 true
             }
+            R.id.palette -> {
+                openPaint()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -96,5 +101,12 @@ class NewnoteFragment : Fragment() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         super.onDestroyView()
+    }
+
+    private fun openPaint(){
+        val fragment = PainterFragment()
+        val transaction = fragmentManager?.beginTransaction() ?: return
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.commit()
     }
 }
