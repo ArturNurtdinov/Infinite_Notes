@@ -106,6 +106,7 @@ class NewnoteFragment : Fragment() {
     private fun openPaint(){
         val fragment = PainterFragment()
         val transaction = fragmentManager?.beginTransaction() ?: return
+        transaction.addToBackStack(null)
         transaction.replace(R.id.nav_host_fragment, fragment)
         transaction.commit()
     }
