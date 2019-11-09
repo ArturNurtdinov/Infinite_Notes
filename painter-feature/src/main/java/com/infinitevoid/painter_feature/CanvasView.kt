@@ -17,7 +17,7 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
 
     init {
         mPaint.isAntiAlias = true
-        mPaint.color = Color.BLACK
+        mPaint.color = Color.RED
         mPaint.style = Paint.Style.STROKE
         mPaint.strokeJoin = Paint.Join.ROUND
         mPaint.strokeWidth = 4f
@@ -33,16 +33,15 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-
         mbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         mCanvas = Canvas(mbitmap!!)
+        super.onSizeChanged(w, h, oldw, oldh)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val x = event!!.x
         val y = event.y
-        when (event.action){
+        when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 onStartTouchEvent(x, y)
                 invalidate()
@@ -50,11 +49,6 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
 
             MotionEvent.ACTION_MOVE -> {
                 onMoveTouchEvent(x, y)
-                invalidate()
-            }
-
-            MotionEvent.ACTION_UP -> {
-                upTouchEvent()
                 invalidate()
             }
         }
@@ -77,10 +71,5 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
             mx = x
             my = y
         }
-    }
-
-    private fun upTouchEvent(){
-        mPath.reset()
-        invalidate()
     }
 }
