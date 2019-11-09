@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".PainterFragment">
 
-    <com.infinitevoid.painter_feature.DrawView
-        android:id="@+id/draw"
+    <com.infinitevoid.painter_feature.CanvasView
+        android:id="@+id/canvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp" />
