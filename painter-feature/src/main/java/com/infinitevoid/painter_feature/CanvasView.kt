@@ -9,6 +9,7 @@ import kotlin.math.abs
 
 class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private var mCanvas: Canvas? = null
+    private var mbitmap: Bitmap? = null
     private var mPath = Path()
     private var mPaint = Paint()
     private var mx = 0.toFloat()
@@ -24,7 +25,10 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
 
     companion object {
         private const val TOLERANCE = 5f
-        var mbitmap: Bitmap? = null
+
+        fun saveBitmap(w: Int, h: Int): Bitmap {
+            return Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {
