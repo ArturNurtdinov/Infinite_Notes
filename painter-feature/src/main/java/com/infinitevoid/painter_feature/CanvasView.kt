@@ -8,7 +8,6 @@ import android.view.View
 import kotlin.math.abs
 
 class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(context, attrs) {
-    private var mbitmap: Bitmap? = null
     private var mCanvas: Canvas? = null
     private var mPath = Path()
     private var mPaint = Paint()
@@ -25,6 +24,7 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
 
     companion object {
         private const val TOLERANCE = 5f
+        var mbitmap: Bitmap? = null
     }
 
     override fun onDraw(canvas: Canvas?) {
