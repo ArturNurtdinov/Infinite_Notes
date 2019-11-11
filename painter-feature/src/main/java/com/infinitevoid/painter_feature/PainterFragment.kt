@@ -1,10 +1,8 @@
 package com.infinitevoid.painter_feature
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 
 /**
  * A simple [Fragment] subclass.
@@ -18,5 +16,23 @@ class PainterFragment : Fragment() {
         setHasOptionsMenu(true)
 
         return inflater.inflate(R.layout.fragment_painter, container, false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.palette_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.close -> {
+
+            }
+
+            R.id.save -> {
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
