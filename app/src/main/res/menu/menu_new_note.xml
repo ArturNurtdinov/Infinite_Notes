@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/palette"
-        android:icon="@drawable/ic_palette_white_24dp"
-        android:title="@string/palette"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/done"
         android:icon="@drawable/ic_done_white_24dp"
         android:title="@string/done"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/ic_save_white_24dp"
+        android:title="@string/save"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/cancel"
