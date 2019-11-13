@@ -1,4 +1,4 @@
-package com.infinitevoid.painter_feature
+package com.infinitevoid.infinitenotes.newnotes
 
 import android.content.Context
 import android.graphics.*
@@ -24,11 +24,7 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
 
     companion object {
         private const val TOLERANCE = 5f
-        private var mbitmap: Bitmap? = null
-
-        fun saveBitmap(): Bitmap? {
-            return mbitmap
-        }
+        var mbitmap: Bitmap? = null
     }
 
     override fun onDraw(canvas: Canvas?) {

@@ -1,2 +1,2 @@
-include ':app', ':painter-feature'
+include ':app'
 rootProject.name='InfiniteNotes'

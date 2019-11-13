@@ -13,4 +13,6 @@
     <string name="note_was_deleted">Note was deleted</string>
     <string name="undo_UC">UNDO</string>
     <string name="palette">Palette</string>
+    <string name="image">IMAGE</string>
+    <string name="save">Save</string>
 </resources>
