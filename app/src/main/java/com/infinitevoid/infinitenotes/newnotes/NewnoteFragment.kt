@@ -2,7 +2,11 @@ package com.infinitevoid.infinitenotes.newnotes
 
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -13,6 +17,8 @@ import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 import com.infinitevoid.infinitenotes.domain.Note
+import kotlinx.android.synthetic.main.fragment_newnote.*
+import java.io.FileNotFoundException
 
 /**
  * A simple [Fragment] subclass.
@@ -46,6 +52,15 @@ class NewnoteFragment : Fragment() {
 
         titleOnOpen = binding.title.text.toString()
         contentOnOpen = binding.content.text.toString()
+
+        try {
+            val fis = context?.openFileInput(note?.noteID.toString())
+            val bitmap = BitmapFactory.decodeStream(fis)
+            CanvasView.mbitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+            fis?.close()
+        } catch (ex: FileNotFoundException) {
+            Log.d("MY_BITMAP", "File still doesn't exist")
+        }
 
         return binding.root
     }
@@ -97,6 +112,10 @@ class NewnoteFragment : Fragment() {
                         binding.content.text.toString()
                     )
                 )
+                val fos = context?.openFileOutput(note?.noteID.toString(), Context.MODE_PRIVATE)
+                image.drawingCache?.compress(Bitmap.CompressFormat.PNG, 100, fos)
+                Log.d("MY_BITMAP", "${image.drawingCache}")
+                fos?.close()
                 true
             }
             else -> super.onOptionsItemSelected(item)
