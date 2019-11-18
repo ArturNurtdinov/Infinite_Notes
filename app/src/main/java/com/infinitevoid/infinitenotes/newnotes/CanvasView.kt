@@ -29,11 +29,14 @@ class CanvasView(internal var context: Context, attrs: AttributeSet?) : View(con
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+        this.isDrawingCacheEnabled = true
         canvas!!.drawPath(mPath, mPaint)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        mbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        if (mbitmap == null) {
+            mbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        }
         mCanvas = Canvas(mbitmap!!)
         super.onSizeChanged(w, h, oldw, oldh)
     }
