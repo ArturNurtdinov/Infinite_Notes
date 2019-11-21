@@ -16,18 +16,18 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun mappingNote() {
-        val note = Note(4, 18874032, "Note Title", "Note Content")
+        val note = Note(4, 18874032, "Note Title", "Note Content", "Uri")
 
-        val expected = NoteRest(4, 18874032, "Note Title", "Note Content")
+        val expected = NoteRest(4, 18874032, "Note Title", "Note Content", "Uri")
 
         assertEquals(expected, mapNoteToNoteRest(note))
     }
 
     @Test
     fun mappingListOfNotes() {
-        val note1 = Note(1, 188740321, "Note Title 1", "Note Content 1")
-        val note2 = Note(2, 188740322, "Note Title 2", "Note Content 2")
-        val note3 = Note(3, 188740323, "Note Title 3", "Note Content 3")
+        val note1 = Note(1, 188740321, "Note Title 1", "Note Content 1", "URI 1")
+        val note2 = Note(2, 188740322, "Note Title 2", "Note Content 2", null)
+        val note3 = Note(3, 188740323, "Note Title 3", "Note Content 3", "")
 
         val expected = listOf(note1, note2, note3)
 
