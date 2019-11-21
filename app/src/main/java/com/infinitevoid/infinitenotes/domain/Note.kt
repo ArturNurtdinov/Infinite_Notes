@@ -11,5 +11,7 @@ data class Note(
 
     var title: String = "Title",
 
-    var content: String = "Content"
+    var content: String = "Content",
+
+    var imageURI: String? = null
 ) : Parcelable
