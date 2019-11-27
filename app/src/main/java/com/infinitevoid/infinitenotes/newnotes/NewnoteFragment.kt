@@ -82,10 +82,11 @@ class NewnoteFragment : Fragment() {
             R.id.done -> {
                 if (note == null) {
                     if (binding.title.text.isNotEmpty() || binding.content.text.isNotEmpty()) {
+
                         val wrapper = ContextWrapper(context)
 
-                        var file = wrapper.getDir("Images", Context.MODE_PRIVATE)
-                        file = File(file, "${note?.noteID}")
+                        var file = wrapper.getDir("images", Context.MODE_PRIVATE)
+                        file = File(file, "${note?.noteID}.jpg")
                         try {
                             val stream = FileOutputStream(file)
                             image.drawingCache?.compress(Bitmap.CompressFormat.PNG, 100, stream)
