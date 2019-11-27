@@ -16,8 +16,5 @@ data class NoteRest(
     var title: String = "Title",
 
     @ColumnInfo(name = "content")
-    var content: String = "Content",
-
-    @ColumnInfo(name = "imageURI")
-    var imageURI: String? = null
+    var content: String = "Content"
 )
