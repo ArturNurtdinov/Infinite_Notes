@@ -2,13 +2,7 @@ package com.infinitevoid.infinitenotes.newnotes
 
 
 import android.content.Context
-import android.content.ContextWrapper
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -19,11 +13,6 @@ import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 import com.infinitevoid.infinitenotes.domain.Note
-import kotlinx.android.synthetic.main.fragment_newnote.*
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
 
 /**
  * A simple [Fragment] subclass.
@@ -58,17 +47,6 @@ class NewnoteFragment : Fragment() {
         titleOnOpen = binding.title.text.toString()
         contentOnOpen = binding.content.text.toString()
 
-        try {
-            if (note?.imageURI != null) {
-                val stream = this.activity!!.assets.open(note?.imageURI!!)
-                val bitmap = BitmapFactory.decodeStream(stream)
-                CanvasView.mbitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-                stream.close()
-            }
-        } catch (ex: FileNotFoundException) {
-            ex.printStackTrace()
-        }
-
         return binding.root
     }
 
@@ -82,27 +60,12 @@ class NewnoteFragment : Fragment() {
             R.id.done -> {
                 if (note == null) {
                     if (binding.title.text.isNotEmpty() || binding.content.text.isNotEmpty()) {
-
-                        val wrapper = ContextWrapper(context)
-
-                        var file = wrapper.getDir("images", Context.MODE_PRIVATE)
-                        file = File(file, "${note?.noteID}.jpg")
-                        try {
-                            val stream = FileOutputStream(file)
-                            image.drawingCache?.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                            stream.flush()
-                            stream.close()
-                        } catch (e: IOException) {
-                            e.printStackTrace()
-                        }
-
                         viewModel.insertNote(
                             Note(
                                 0,
                                 System.currentTimeMillis(),
                                 binding.title.text.toString(),
-                                binding.content.text.toString(),
-                                Uri.parse(file.absolutePath).toString()
+                                binding.content.text.toString()
                             )
                         )
                     }
@@ -114,8 +77,7 @@ class NewnoteFragment : Fragment() {
                             note!!.noteID,
                             System.currentTimeMillis(),
                             binding.title.text.toString(),
-                            binding.content.text.toString(),
-                            note!!.imageURI
+                            binding.content.text.toString()
                         )
                     )
                 }
