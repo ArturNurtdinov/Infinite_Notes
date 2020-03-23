@@ -9,6 +9,12 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/delay_notification"
+        android:icon="@drawable/ic_timer_white_24dp"
+        android:title="@string/delay"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/cancel"
         android:icon="@drawable/ic_close_white_24dp"
         android:title="@string/cancel"
