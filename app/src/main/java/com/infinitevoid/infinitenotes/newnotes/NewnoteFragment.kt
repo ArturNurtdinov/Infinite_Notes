@@ -1,6 +1,8 @@
 package com.infinitevoid.infinitenotes.newnotes
 
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +11,11 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-
 import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 import com.infinitevoid.infinitenotes.domain.Note
+import kotlinx.android.synthetic.main.fragment_newnote.*
 
 /**
  * A simple [Fragment] subclass.
@@ -41,7 +43,8 @@ class NewnoteFragment : Fragment() {
         val viewModelFactory = NewnoteViewModelFactory(dataSource)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewnoteViewModel::class.java)
 
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         binding.content.requestFocus()
 
@@ -85,6 +88,24 @@ class NewnoteFragment : Fragment() {
                 activity?.onBackPressed()
                 true
             }
+            R.id.delay_notification -> {
+                val intent = Intent(requireContext(), NotificationReceiver::class.java)
+                intent.putExtra(CONTENT_KEY, title.text.toString())
+                val pendingIntent = PendingIntent.getBroadcast(
+                    requireContext(),
+                    1,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+                val alarmManager =
+                    requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                alarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    System.currentTimeMillis() + 10000,
+                    pendingIntent
+                )
+                true
+            }
             R.id.cancel -> {
                 activity?.onBackPressed()
                 true
@@ -97,5 +118,9 @@ class NewnoteFragment : Fragment() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         super.onDestroyView()
+    }
+
+    companion object {
+        val CONTENT_KEY = "CONTENT_KEY"
     }
 }
