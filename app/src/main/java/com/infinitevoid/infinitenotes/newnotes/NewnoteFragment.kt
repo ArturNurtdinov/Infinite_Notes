@@ -2,6 +2,7 @@ package com.infinitevoid.infinitenotes.newnotes
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -40,7 +41,7 @@ class NewnoteFragment : Fragment() {
         val viewModelFactory = NewnoteViewModelFactory(dataSource)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewnoteViewModel::class.java)
 
-        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as (InputMethodManager)
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         binding.content.requestFocus()
 
