@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNotesBinding
-import com.infinitevoid.infinitenotes.domain.Note
+import com.infinitevoid.infinitenotes.models.Note
 import com.infinitevoid.infinitenotes.mappers.mapNoteRestListToNoteList
 import com.infinitevoid.infinitenotes.mappers.mapNoteToNoteRest
 import com.infinitevoid.infinitenotes.newnotes.NewnoteFragment

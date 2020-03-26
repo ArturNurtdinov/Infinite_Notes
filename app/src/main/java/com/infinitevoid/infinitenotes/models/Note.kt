@@ -1,4 +1,4 @@
-package com.infinitevoid.infinitenotes.domain
+package com.infinitevoid.infinitenotes.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

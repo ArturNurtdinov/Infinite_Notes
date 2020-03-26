@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
-import com.infinitevoid.infinitenotes.domain.Note
+import com.infinitevoid.infinitenotes.models.Note
 import kotlinx.android.synthetic.main.fragment_newnote.*
 
 /**

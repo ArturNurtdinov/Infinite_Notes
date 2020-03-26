@@ -1,7 +1,7 @@
 package com.infinitevoid.infinitenotes
 
 import com.infinitevoid.infinitenotes.database.NoteRest
-import com.infinitevoid.infinitenotes.domain.Note
+import com.infinitevoid.infinitenotes.models.Note
 import com.infinitevoid.infinitenotes.mappers.mapNoteRestListToNoteList
 import com.infinitevoid.infinitenotes.mappers.mapNoteToNoteRest
 import org.junit.Test

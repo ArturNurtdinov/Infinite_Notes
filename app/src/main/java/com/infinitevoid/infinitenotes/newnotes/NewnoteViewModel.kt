@@ -3,7 +3,7 @@ package com.infinitevoid.infinitenotes.newnotes
 import androidx.lifecycle.ViewModel
 import com.infinitevoid.infinitenotes.database.NoteRest
 import com.infinitevoid.infinitenotes.database.NotesDatabaseDao
-import com.infinitevoid.infinitenotes.domain.Note
+import com.infinitevoid.infinitenotes.models.Note
 import com.infinitevoid.infinitenotes.mappers.mapNoteToNoteRest
 import kotlinx.coroutines.*
 

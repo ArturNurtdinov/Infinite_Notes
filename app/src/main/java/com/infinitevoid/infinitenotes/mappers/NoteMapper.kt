@@ -1,7 +1,7 @@
 package com.infinitevoid.infinitenotes.mappers
 
 import com.infinitevoid.infinitenotes.database.NoteRest
-import com.infinitevoid.infinitenotes.domain.Note
+import com.infinitevoid.infinitenotes.models.Note
 
 fun mapNoteRestToNote(noteRest: NoteRest): Note {
     with(noteRest) { return Note(noteID, timeEdit, title, content) }
