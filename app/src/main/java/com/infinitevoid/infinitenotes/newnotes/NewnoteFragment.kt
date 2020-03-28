@@ -2,10 +2,13 @@ package com.infinitevoid.infinitenotes.newnotes
 
 
 import android.app.AlarmManager
+import android.app.DatePickerDialog
 import android.app.PendingIntent
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -16,6 +19,7 @@ import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 import com.infinitevoid.infinitenotes.models.Note
 import kotlinx.android.synthetic.main.fragment_newnote.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -89,7 +93,29 @@ class NewnoteFragment : Fragment() {
                 true
             }
             R.id.delay_notification -> {
-                val intent = Intent(requireContext(), NotificationReceiver::class.java)
+                val c = Calendar.getInstance()
+                val year = c.get(Calendar.YEAR)
+                val month = c.get(Calendar.MONTH)
+                val day = c.get(Calendar.DAY_OF_MONTH)
+
+                val dpd = DatePickerDialog(
+                    requireContext(),
+                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                            c.set(Calendar.HOUR_OF_DAY, hour)
+                            c.set(Calendar.MINUTE, minute)
+                            Log.d("LOG_TAG", "$year $monthOfYear $dayOfMonth $hour $minute")
+                        }
+                        TimePickerDialog(requireContext(), timeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show()
+                        // TODO need to schedule notification and write in Toast about it
+                    },
+                    year,
+                    month,
+                    day
+                )
+
+                dpd.show()
+                /*val intent = Intent(requireContext(), NotificationReceiver::class.java)
                 intent.putExtra(CONTENT_KEY, title.text.toString())
                 val pendingIntent = PendingIntent.getBroadcast(
                     requireContext(),
@@ -103,7 +129,7 @@ class NewnoteFragment : Fragment() {
                     AlarmManager.RTC_WAKEUP,
                     System.currentTimeMillis() + 10000,
                     pendingIntent
-                )
+                )*/
                 true
             }
             R.id.cancel -> {
