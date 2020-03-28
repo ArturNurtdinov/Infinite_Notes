@@ -1,12 +1,9 @@
 package com.infinitevoid.infinitenotes.newnotes
 
 
-import android.app.AlarmManager
 import android.app.DatePickerDialog
-import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -18,7 +15,6 @@ import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 import com.infinitevoid.infinitenotes.models.Note
-import kotlinx.android.synthetic.main.fragment_newnote.*
 import java.util.*
 
 /**
