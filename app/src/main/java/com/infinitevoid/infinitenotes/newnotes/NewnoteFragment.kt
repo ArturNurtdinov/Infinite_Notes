@@ -103,9 +103,7 @@ class NewnoteFragment : Fragment() {
                     DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                         val timeSetListener =
                             TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-                                calCurrent.set(Calendar.HOUR_OF_DAY, hour)
-                                calCurrent.set(Calendar.MINUTE, minute)
-                                Log.d("LOG_TAG", "$year $monthOfYear $dayOfMonth $hour $minute")
+                                calCurrent.timeInMillis = System.currentTimeMillis()
 
                                 val intent = Intent(requireContext(), NotificationReceiver::class.java)
                                 intent.putExtra(CONTENT_KEY, title.text.toString())
@@ -121,7 +119,7 @@ class NewnoteFragment : Fragment() {
                                 cal.set(year, monthOfYear, dayOfMonth, hour, minute)
                                 alarmManager.set(
                                     AlarmManager.RTC_WAKEUP,
-                                    System.currentTimeMillis() + calCurrent.timeInMillis - cal.timeInMillis,
+                                    System.currentTimeMillis() + cal.timeInMillis - calCurrent.timeInMillis,
                                     pendingIntent
                                 )
                             }
