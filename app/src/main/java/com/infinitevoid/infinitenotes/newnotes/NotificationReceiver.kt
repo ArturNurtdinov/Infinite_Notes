@@ -31,7 +31,7 @@ class NotificationReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context!!, CHANNEL_ID)
             .setContentTitle(context.resources.getString(R.string.app_name))
             .setContentText(content)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setChannelId(CHANNEL_ID)
         with(NotificationManagerCompat.from(context)) {
