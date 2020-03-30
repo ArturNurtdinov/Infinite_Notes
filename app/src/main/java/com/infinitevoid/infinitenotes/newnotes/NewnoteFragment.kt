@@ -1,9 +1,12 @@
 package com.infinitevoid.infinitenotes.newnotes
 
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,6 +18,7 @@ import com.infinitevoid.infinitenotes.R
 import com.infinitevoid.infinitenotes.database.NotesDatabase
 import com.infinitevoid.infinitenotes.databinding.FragmentNewnoteBinding
 import com.infinitevoid.infinitenotes.models.Note
+import kotlinx.android.synthetic.main.fragment_newnote.*
 import java.util.*
 
 /**
@@ -89,43 +93,52 @@ class NewnoteFragment : Fragment() {
                 true
             }
             R.id.delay_notification -> {
-                val c = Calendar.getInstance()
-                val year = c.get(Calendar.YEAR)
-                val month = c.get(Calendar.MONTH)
-                val day = c.get(Calendar.DAY_OF_MONTH)
+                val calCurrent = Calendar.getInstance()
+                val currentYear = calCurrent.get(Calendar.YEAR)
+                val currentMonth = calCurrent.get(Calendar.MONTH)
+                val currentDay = calCurrent.get(Calendar.DAY_OF_MONTH)
 
                 val dpd = DatePickerDialog(
                     requireContext(),
-                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                            c.set(Calendar.HOUR_OF_DAY, hour)
-                            c.set(Calendar.MINUTE, minute)
-                            Log.d("LOG_TAG", "$year $monthOfYear $dayOfMonth $hour $minute")
-                        }
-                        TimePickerDialog(requireContext(), timeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show()
-                        // TODO need to schedule notification and write in Toast about it
+                    DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                        val timeSetListener =
+                            TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                                calCurrent.set(Calendar.HOUR_OF_DAY, hour)
+                                calCurrent.set(Calendar.MINUTE, minute)
+                                Log.d("LOG_TAG", "$year $monthOfYear $dayOfMonth $hour $minute")
+
+                                val intent = Intent(requireContext(), NotificationReceiver::class.java)
+                                intent.putExtra(CONTENT_KEY, title.text.toString())
+                                val pendingIntent = PendingIntent.getBroadcast(
+                                    requireContext(),
+                                    1,
+                                    intent,
+                                    PendingIntent.FLAG_UPDATE_CURRENT
+                                )
+                                val alarmManager =
+                                    requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                                val cal = Calendar.getInstance()
+                                cal.set(year, monthOfYear, dayOfMonth, hour, minute)
+                                alarmManager.set(
+                                    AlarmManager.RTC_WAKEUP,
+                                    System.currentTimeMillis() + calCurrent.timeInMillis - cal.timeInMillis,
+                                    pendingIntent
+                                )
+                            }
+                        TimePickerDialog(
+                            requireContext(),
+                            timeSetListener,
+                            calCurrent.get(Calendar.HOUR_OF_DAY),
+                            calCurrent.get(Calendar.MINUTE),
+                            true
+                        ).show()
                     },
-                    year,
-                    month,
-                    day
+                    currentYear,
+                    currentMonth,
+                    currentDay
                 )
 
                 dpd.show()
-                /*val intent = Intent(requireContext(), NotificationReceiver::class.java)
-                intent.putExtra(CONTENT_KEY, title.text.toString())
-                val pendingIntent = PendingIntent.getBroadcast(
-                    requireContext(),
-                    1,
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-                )
-                val alarmManager =
-                    requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                alarmManager.set(
-                    AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + 10000,
-                    pendingIntent
-                )*/
                 true
             }
             R.id.cancel -> {
