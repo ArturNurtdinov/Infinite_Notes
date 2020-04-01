@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -106,6 +107,7 @@ class NewnoteFragment : Fragment() {
                                 cal.timeInMillis = System.currentTimeMillis()
                                 cal.set(year, monthOfYear, dayOfMonth, hour, minute)
                                 setDelayNotification(cal.timeInMillis)
+                                Toast.makeText(requireContext(), "Notification delayed at ${cal.time}", Toast.LENGTH_LONG).show()
                             }
                         TimePickerDialog(
                             requireContext(),
