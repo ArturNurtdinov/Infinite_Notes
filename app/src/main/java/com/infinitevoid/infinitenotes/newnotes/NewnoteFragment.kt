@@ -98,31 +98,15 @@ class NewnoteFragment : Fragment() {
                 val currentMonth = calCurrent.get(Calendar.MONTH)
                 val currentDay = calCurrent.get(Calendar.DAY_OF_MONTH)
 
-                val dpd = DatePickerDialog(
+                DatePickerDialog(
                     requireContext(),
                     DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                         val timeSetListener =
                             TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-                                calCurrent.timeInMillis = System.currentTimeMillis()
-
-                                val intent = Intent(requireContext(), NotificationReceiver::class.java)
-                                intent.putExtra(CONTENT_KEY, title.text.toString())
-                                val pendingIntent = PendingIntent.getBroadcast(
-                                    requireContext(),
-                                    1,
-                                    intent,
-                                    PendingIntent.FLAG_UPDATE_CURRENT
-                                )
-                                val alarmManager =
-                                    requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
                                 val cal = Calendar.getInstance()
                                 cal.timeInMillis = System.currentTimeMillis()
                                 cal.set(year, monthOfYear, dayOfMonth, hour, minute)
-                                alarmManager.set(
-                                    AlarmManager.RTC_WAKEUP,
-                                    cal.timeInMillis,
-                                    pendingIntent
-                                )
+                                setDelayNotification(cal.timeInMillis)
                             }
                         TimePickerDialog(
                             requireContext(),
@@ -135,9 +119,7 @@ class NewnoteFragment : Fragment() {
                     currentYear,
                     currentMonth,
                     currentDay
-                )
-
-                dpd.show()
+                ).show()
                 true
             }
             R.id.cancel -> {
@@ -146,6 +128,24 @@ class NewnoteFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun setDelayNotification(triggerAtMillis: Long) {
+        val intent = Intent(requireContext(), NotificationReceiver::class.java)
+        intent.putExtra(CONTENT_KEY, title.text.toString())
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            1,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val alarmManager =
+            requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.set(
+            AlarmManager.RTC_WAKEUP,
+            triggerAtMillis,
+            pendingIntent
+        )
     }
 
     override fun onDestroyView() {
