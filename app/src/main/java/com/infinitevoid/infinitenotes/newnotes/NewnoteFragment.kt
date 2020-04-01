@@ -116,10 +116,11 @@ class NewnoteFragment : Fragment() {
                                 val alarmManager =
                                     requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
                                 val cal = Calendar.getInstance()
+                                cal.timeInMillis = System.currentTimeMillis()
                                 cal.set(year, monthOfYear, dayOfMonth, hour, minute)
                                 alarmManager.set(
                                     AlarmManager.RTC_WAKEUP,
-                                    System.currentTimeMillis() + cal.timeInMillis - calCurrent.timeInMillis,
+                                    cal.timeInMillis,
                                     pendingIntent
                                 )
                             }
